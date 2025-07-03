@@ -1,0 +1,24 @@
+-- LeetCode 182: Duplicate Emails
+-- Difficulty: Easy
+--
+-- Problem:
+-- Write a SQL query to find all duplicate emails in a table named Person.
+-- Return the email addresses that appear more than once in the table.
+--
+-- Table: Person
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | id          | int     |
+-- | email       | varchar |
+-- +-------------+---------+
+-- id is the primary key for this table.
+
+-- Solution:
+-- Group by email and use HAVING to filter for those with a count greater than 1.
+
+SELECT 
+    email
+FROM Person
+GROUP BY email
+HAVING COUNT(email) > 1;
