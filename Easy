@@ -1,0 +1,41 @@
+-- LeetCode 175: Combine Two Tables
+-- Difficulty: Easy
+-- 
+-- Problem:
+-- Given two tables: 'Person' and 'Address'
+-- Write a query to display the first name, last name, city, and state
+-- of each person. If a person does not have an address, display NULLs
+-- for the city and state.
+--
+-- Table: Person
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | PersonId    | int     |
+-- | FirstName   | varchar |
+-- | LastName    | varchar |
+-- +-------------+---------+
+-- PersonId is the primary key for this table.
+--
+-- Table: Address
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | AddressId   | int     |
+-- | PersonId    | int     |
+-- | City        | varchar |
+-- | State       | varchar |
+-- +-------------+---------+
+-- AddressId is the primary key for this table.
+--
+-- Expected Output:
+-- Return all people with their address info (if available).
+-- If the address is not available, return NULLs for city and state.
+
+SELECT 
+    p.FirstName,
+    p.LastName,
+    a.City,
+    a.State
+FROM Person p
+LEFT JOIN Address a ON p.PersonId = a.PersonId;
