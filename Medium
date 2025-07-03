@@ -1,0 +1,37 @@
+-- LeetCode 176: Second Highest Salary
+-- Difficulty: Medium
+--
+-- Problem:
+-- Write a SQL query to get the second highest salary from the Employee table.
+-- If there is no second highest salary, the result should be NULL.
+--
+-- Table: Employee
+-- +-------------+------+
+-- | Column Name | Type |
+-- +-------------+------+
+-- | id          | int  |
+-- | salary      | int  |
+-- +-------------+------+
+-- id is the primary key for this table.
+
+-- Solution:
+-- Use the DISTINCT keyword to handle duplicate salaries.
+-- Use LIMIT with OFFSET to get the second highest salary.
+-- Wrap in a subquery and use a SELECT to return NULL if not found.
+
+SELECT 
+    (
+        SELECT DISTINCT salary 
+        FROM Employee 
+        ORDER BY salary DESC 
+        LIMIT 1 OFFSET 1
+    ) AS SecondHighestSalary;
+
+
+SELECT 
+   MAX(salary) as SecondHighestSalary
+FROM 
+  Employee 
+WHERE 
+  salary < (SELECT MAX(salary) FROM Employee);
+
