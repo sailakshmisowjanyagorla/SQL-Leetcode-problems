@@ -1,0 +1,35 @@
+-- LeetCode 184. Department Highest Salary
+-- https://leetcode.com/problems/department-highest-salary/
+
+-- 🧾 Question:
+-- Write a SQL query to find the highest salary for each department.
+--
+-- Table: Employee
+-- +----+----------+--------+------------+
+-- | id | name     | salary | department |
+-- +----+----------+--------+------------+
+-- | 1  | Joe      | 70000  | IT         |
+-- | 2  | Jim      | 90000  | HR         |
+-- | 3  | Henry    | 80000  | IT         |
+-- | 4  | Sam      | 60000  | Finance    |
+-- | 5  | Max      | 90000  | Finance    |
+-- +----+----------+--------+------------+
+--
+-- Output:
+-- +------------+----------------+
+-- | department | highest_salary |
+-- +------------+----------------+
+-- | Finance    | 90000          |
+-- | HR         | 90000          |
+-- | IT         | 80000          |
+-- +------------+----------------+
+
+-- Answer:
+select d.name as Department, e.name as Employee , e.salary
+from Employee e 
+join Department d on e.departmentId = d.id
+WHERE (e.departmentId, e.salary) IN (
+    SELECT departmentId, MAX(salary)
+    FROM Employee
+    GROUP BY departmentId
+);
